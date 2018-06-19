@@ -1,0 +1,437 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     17030,        429]
+NotebookOptionsPosition[     15065,        394]
+NotebookOutlinePosition[     15423,        410]
+CellTagsIndexPosition[     15380,        407]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+ "Compare PN and numerical calculations of the infinity flux ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    OverscriptBox["\[ScriptCapitalE]", "."], "\[Infinity]"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "bcf944ff-c750-49c5-94cf-0a4526a19fd3"],
+ " "
+}], "Title",
+ CellChangeTimes->{{3.738432180589571*^9, 
+  3.7384322325280952`*^9}},ExpressionUUID->"00dcc0c2-9229-4453-9423-\
+f300f9b42344"],
+
+Cell[TextData[{
+ StyleBox["Load the PostNewtonianSelfForce package from the Black Hole \
+Perturbation Toolkit (",
+  FontColor->RGBColor[0, 0, 1]],
+ StyleBox[ButtonBox["bhptoolkit.org",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://bhptoolkit.org"], None},
+  ButtonNote->"http://bhptoolkit.org"],
+  FontColor->RGBColor[0, 0, 1]],
+ StyleBox["). Also load the SimulationsTools package from ",
+  FontColor->RGBColor[0, 0, 1]],
+ StyleBox[ButtonBox["simulationtools.org",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://simulationtools.org"], None},
+  ButtonNote->"http://simulationtools.org"],
+  FontColor->RGBColor[0, 0, 1]],
+ StyleBox[".",
+  FontColor->RGBColor[0, 0, 1]]
+}], "Text",
+ CellChangeTimes->{{3.738432239527686*^9, 3.7384323750393133`*^9}, {
+  3.7384326919134817`*^9, 
+  3.738432755475559*^9}},ExpressionUUID->"70f21528-4da8-4560-85cc-\
+06cd6939c929"],
+
+Cell[BoxData[{
+ RowBox[{"<<", "PostNewtonianSelfForce`"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "SimulationTools`"}]}], "Input",
+ CellChangeTimes->{{3.738423321132124*^9, 3.7384233289556637`*^9}, {
+  3.738428471675087*^9, 
+  3.738428475338112*^9}},ExpressionUUID->"564a5ff7-837c-4d82-9ac4-\
+265617ca0e89"],
+
+Cell[TextData[StyleBox["Load the PN series for the infinity flux and take the \
+N[..] of it to make it quicker to evaluate",
+ FontColor->RGBColor[0, 0, 1]]], "Text",
+ CellChangeTimes->{{3.738432396619342*^9, 
+  3.7384324114735126`*^9}},ExpressionUUID->"7ad4745d-e814-42ef-9e9e-\
+dbc1168bd9de"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Edot\[Infinity]PN", "=", 
+   RowBox[{
+   "PostNewtonianExpansion", "[", 
+    "\"\<Schwarzschild/Circular/Flux/Infinity\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"NEdot\[Infinity]PNAll", "=", 
+   RowBox[{"N", "[", 
+    RowBox[{
+     RowBox[{"Edot\[Infinity]PN", "[", "\"\<Series\>\"", "]"}], "//", 
+     "Normal"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.7384233304666767`*^9, 3.738423352491982*^9}, {
+   3.738427881871827*^9, 3.738427924915924*^9}, {3.7384279606101027`*^9, 
+   3.738427975959751*^9}, {3.738428176479768*^9, 3.738428176671373*^9}, {
+   3.738429332688302*^9, 3.738429334062181*^9}, 3.738432105053482*^9, {
+   3.738432388075197*^9, 
+   3.7384323882509203`*^9}},ExpressionUUID->"df9e5aed-11d1-49e3-9f3b-\
+b5fc2167b06c"],
+
+Cell[TextData[StyleBox["Create truncated version of the PN series so can \
+compare how adding terms improves the approximation",
+ FontColor->RGBColor[0, 0, 1]]], "Text",
+ CellChangeTimes->{{3.738432599947028*^9, 
+  3.738432635530396*^9}},ExpressionUUID->"63ee1f44-982d-4391-98f9-\
+238e5abe8680"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"NEdot\[Infinity]PN", "[", "n", "]"}], "=", 
+     RowBox[{
+      RowBox[{"Normal", "[", 
+       RowBox[{"Series", "[", 
+        RowBox[{"NEdot\[Infinity]PNAll", ",", 
+         RowBox[{"{", 
+          RowBox[{"y", ",", "0", ",", "n"}], "}"}]}], "]"}], "]"}], "/.", 
+      RowBox[{"y", "\[Rule]", 
+       RowBox[{"1", "/", "r0"}]}]}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", "0", ",", "27"}], "}"}]}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.738428407410351*^9, 3.738428448847727*^9}, {
+  3.738428514389763*^9, 3.738428558351878*^9}, {3.738428633534584*^9, 
+  3.738428635292553*^9}},ExpressionUUID->"1b9cdc07-4bdb-4973-b8c3-\
+8210f80914b0"],
+
+Cell[TextData[StyleBox["Load the numerical flux data from the \
+CircularOrbitSelfForceData repository which part of the Toolkit. Change the \
+file location to where you store the data on your machine.",
+ FontColor->RGBColor[0, 0, 1]]], "Text",
+ CellChangeTimes->{{3.7384324246925592`*^9, 
+  3.7384324748742123`*^9}},ExpressionUUID->"da1c9873-4772-4aca-b860-\
+2459eb131cfd"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "SetDirectory", "[", 
+   "\"\<~/BlackHolePerturbationToolkit/CircularOrbitSelfForceData/\
+Schwarzschild/\>\"", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"EdotData", "=", 
+   RowBox[{"Import", "[", "\"\<Flux_Edot.dat\>\"", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.738428139993456*^9, 3.7384281684332047`*^9}, {
+  3.738428564296721*^9, 
+  3.738428564471047*^9}},ExpressionUUID->"00cebfd0-f9a8-4994-86b7-\
+837b6584fa06"],
+
+Cell[TextData[StyleBox["Manipulate the flux data into a useful form",
+ FontColor->RGBColor[0, 0, 1]]], "Text",
+ CellChangeTimes->{{3.73843248574613*^9, 3.738432494961956*^9}, 
+   3.738432794836596*^9},ExpressionUUID->"f6bbf3b4-92a0-48c2-a6af-\
+635da4c807f5"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Edot\[Infinity]Data", "=", 
+   RowBox[{"ToDataTable", "[", 
+    RowBox[{"EdotData", "[", 
+     RowBox[{"[", 
+      RowBox[{
+       RowBox[{";;", ";;", "10"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "2"}], "}"}]}], "]"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"EdotHData", "=", 
+   RowBox[{"ToDataTable", "[", 
+    RowBox[{"EdotData", "[", 
+     RowBox[{"[", 
+      RowBox[{
+       RowBox[{";;", ";;", "10"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "3"}], "}"}]}], "]"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r0s", "=", 
+   RowBox[{"ToListOfCoordinates", "[", "Edot\[Infinity]Data", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Edot\[Infinity]Diff", "[", "n", "]"}], "=", 
+     RowBox[{"Edot\[Infinity]Data", "-", 
+      RowBox[{"ToDataTable", "[", 
+       RowBox[{"Transpose", "[", 
+        RowBox[{"{", 
+         RowBox[{"r0s", ",", 
+          RowBox[{
+           RowBox[{"NEdot\[Infinity]PN", "[", "n", "]"}], "/.", 
+           RowBox[{"r0", "\[Rule]", "r0s"}]}]}], "}"}], "]"}], "]"}]}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", "5", ",", "27"}], "}"}]}], "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.738428194392048*^9, 3.7384282641516733`*^9}, {
+  3.738428305883624*^9, 3.738428317731031*^9}, {3.738428563440668*^9, 
+  3.738428598303376*^9}, {3.738430081757999*^9, 3.738430081988693*^9}, {
+  3.738430271567419*^9, 3.7384302722546167`*^9}, {3.738431466599649*^9, 
+  3.738431509756711*^9}},ExpressionUUID->"6a13fae7-6a17-41d9-9d4b-\
+140ed39f651e"],
+
+Cell[TextData[StyleBox["Define some nice plots",
+ FontColor->RGBColor[0, 0, 1]]], "Text",
+ CellChangeTimes->{{3.738432500889662*^9, 
+  3.7384325037373857`*^9}},ExpressionUUID->"36038849-6d1d-4f32-a7a7-\
+a8ca4629c936"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"StrongFieldPlot", "[", "n_", "]"}], ":=", 
+   RowBox[{
+    RowBox[{"StrongFieldPlot", "[", "n", "]"}], "=", 
+    RowBox[{"Show", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"ListPlot", "[", 
+       RowBox[{
+        RowBox[{"Slab", "[", 
+         RowBox[{"Edot\[Infinity]Data", ",", 
+          RowBox[{"6", ";;", "8"}]}], "]"}], ",", 
+        RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+        RowBox[{"PlotTheme", "\[Rule]", "\"\<Detailed\>\""}], ",", 
+        RowBox[{"FrameLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<\!\(\*SubscriptBox[\(r\), \(0\)]\)/M\>\"", ",", 
+           "\"\<\!\(\*SuperscriptBox[OverscriptBox[\(\[ScriptCapitalE]\), \(.\
+\)], \(\[Infinity]\)]\)\>\""}], "}"}]}], ",", 
+        RowBox[{"BaseStyle", "\[Rule]", "20"}], ",", 
+        RowBox[{"PlotLegends", "\[Rule]", 
+         RowBox[{"Placed", "[", 
+          RowBox[{
+           RowBox[{"LineLegend", "[", 
+            RowBox[{
+            "{", "\"\<\!\(\*SubsuperscriptBox[OverscriptBox[\(\
+\[ScriptCapitalE]\), \(.\)], \(num\), \(\[Infinity]\)]\)\>\"", "}"}], "]"}], 
+           ",", 
+           RowBox[{"Scaled", "[", 
+            RowBox[{"{", 
+             RowBox[{"0.7", ",", "0.8"}], "}"}], "]"}]}], "]"}]}]}], "]"}], 
+      ",", "\[IndentingNewLine]", 
+      RowBox[{"Plot", "[", 
+       RowBox[{
+        RowBox[{"NEdot\[Infinity]PN", "[", "n", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"r0", ",", "6", ",", "10"}], "}"}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", "Red"}], ",", 
+        RowBox[{"PlotLegends", "\[Rule]", 
+         RowBox[{"Placed", "[", 
+          RowBox[{
+           RowBox[{"LineLegend", "[", 
+            RowBox[{"{", 
+             RowBox[{"Subsuperscript", "[", 
+              RowBox[{
+              "\"\<\!\(\*OverscriptBox[\(\[ScriptCapitalE]\), \(.\)]\)\>\"", 
+               ",", 
+               RowBox[{"\"\<PN[\>\"", "<>", 
+                RowBox[{"ToString", "[", 
+                 RowBox[{"n", "-", "5"}], "]"}], "<>", "\"\<]\>\""}], ",", 
+               "\"\<\[Infinity]\>\""}], "]"}], "}"}], "]"}], ",", 
+           RowBox[{"Scaled", "[", 
+            RowBox[{"{", 
+             RowBox[{"0.7", ",", "0.8"}], "}"}], "]"}]}], "]"}]}]}], "]"}]}], 
+     "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.738431254785986*^9, 3.738431328985333*^9}, {
+  3.738431377540433*^9, 3.738431391034305*^9}, {3.738431822657146*^9, 
+  3.7384318377539577`*^9}},ExpressionUUID->"464d620d-0d2d-49da-88dc-\
+755b8ffc1cd0"],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "[", "DiffPlot", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DiffPlot", "[", "n_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"DiffPlot", "[", "n", "]"}], "=", 
+   RowBox[{"ListLogLogPlot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Edot\[Infinity]Data", "//", "Abs"}], ",", 
+       RowBox[{
+        RowBox[{"Edot\[Infinity]Diff", "[", "n", "]"}], "//", "Abs"}]}], 
+      "}"}], ",", 
+     RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+     RowBox[{"PlotTheme", "\[Rule]", "\"\<Detailed\>\""}], ",", 
+     RowBox[{"BaseStyle", "\[Rule]", "20"}], ",", 
+     RowBox[{"FrameLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<\!\(\*SubscriptBox[\(r\), \(0\)]\)/M\>\"", ",", 
+        RowBox[{
+        "\"\<|\!\(\*SubsuperscriptBox[OverscriptBox[\(\[ScriptCapitalE]\), \
+\(.\)], \(num\), \(\[Infinity]\)]\) - \>\"", "<>", 
+         "\"\< \\!\\( \!\(\*OverscriptBox[\(\[ScriptCapitalE]\), \(.\)]\) \\^ \
+\[Infinity] \\% \\(PN[ \>\"", "<>", 
+         RowBox[{"ToString", "[", 
+          RowBox[{"n", "-", "5"}], "]"}], "<>", "\"\<]\\)\\)|\>\""}]}], 
+       "}"}]}]}], "]"}]}]}]}], "Input",
+ CellChangeTimes->{{3.738431410632697*^9, 3.738431425385502*^9}, {
+   3.738431515831171*^9, 3.738431516405245*^9}, {3.738431675043491*^9, 
+   3.738431676545917*^9}, {3.738431801668232*^9, 3.738431804890946*^9}, 
+   3.738431858345294*^9},ExpressionUUID->"5d24123c-0926-4051-b662-\
+dffb0df13dc2"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Monitor", "[", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"StrongFieldPlot", "[", "n", "]"}], ",", 
+        RowBox[{"DiffPlot", "[", "n", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"n", ",", "5", ",", "27"}], "}"}]}], "]"}], ",", "n"}], "]"}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.738431385313384*^9, 3.738431400977072*^9}, {
+  3.738431436911173*^9, 3.73843144160658*^9}, {3.738432850104821*^9, 
+  3.73843285293758*^9}},ExpressionUUID->"058b394d-a4fe-48cf-809b-\
+a4b5db15db33"],
+
+Cell[TextData[StyleBox["Plot the strong field flux data (left plot), and the \
+difference between the flux data and the PN series as a function of the order \
+of the truncated PN series.",
+ FontColor->RGBColor[0, 0, 1]]], "Text",
+ CellChangeTimes->{{3.738432508905575*^9, 3.738432582226131*^9}, {
+  3.738432642035928*^9, 
+  3.738432657904636*^9}},ExpressionUUID->"3fe72492-a4e7-4754-ae0b-\
+ee6b4063b73c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"GraphicsRow", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"StrongFieldPlot", "[", "n", "]"}], ",", 
+       RowBox[{"DiffPlot", "[", "n", "]"}]}], "}"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "1200"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"n", ",", "5", ",", "27", ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.738431333576445*^9, 3.738431353454645*^9}, {
+  3.738431450376923*^9, 3.7384314514143763`*^9}, {3.73843164146071*^9, 
+  3.73843164780781*^9}, {3.738431685354755*^9, 3.7384317085908413`*^9}, {
+  3.7384319918811417`*^9, 
+  3.738432017818439*^9}},ExpressionUUID->"95531b88-bad8-4a13-88f1-\
+02b497592ed4"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 5, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`n$$], 5, 27, 1}}, Typeset`size$$ = {
+    1200., {253., 257.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`n$11484$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 5}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$11484$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> GraphicsRow[{
+         $CellContext`StrongFieldPlot[$CellContext`n$$], 
+         $CellContext`DiffPlot[$CellContext`n$$]}, ImageSize -> 1200], 
+      "Specifications" :> {{$CellContext`n$$, 5, 27, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{1245., {298., 304.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.738431648819845*^9, {3.738431679308227*^9, 3.7384317103890343`*^9}, {
+   3.7384318450285587`*^9, 3.7384318655911016`*^9}, {3.73843200222265*^9, 
+   3.7384320185573597`*^9}, 3.7384328465036907`*^9, 
+   3.738432884057716*^9},ExpressionUUID->"520c5c24-c90c-409c-8a90-\
+60361a21fad8"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1399, 712},
+WindowMargins->{{4, Automatic}, {Automatic, 5}},
+FrontEndVersion->"11.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (September \
+10, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 442, 12, 99, "Title",ExpressionUUID->"00dcc0c2-9229-4453-9423-f300f9b42344"],
+Cell[1025, 36, 881, 24, 35, "Text",ExpressionUUID->"70f21528-4da8-4560-85cc-06cd6939c929"],
+Cell[1909, 62, 307, 6, 52, "Input",ExpressionUUID->"564a5ff7-837c-4d82-9ac4-265617ca0e89"],
+Cell[2219, 70, 293, 5, 35, "Text",ExpressionUUID->"7ad4745d-e814-42ef-9e9e-dbc1168bd9de"],
+Cell[2515, 77, 805, 19, 52, "Input",ExpressionUUID->"df9e5aed-11d1-49e3-9f3b-b5fc2167b06c"],
+Cell[3323, 98, 295, 5, 35, "Text",ExpressionUUID->"63ee1f44-982d-4391-98f9-238e5abe8680"],
+Cell[3621, 105, 740, 19, 30, "Input",ExpressionUUID->"1b9cdc07-4bdb-4973-b8c3-8210f80914b0"],
+Cell[4364, 126, 373, 6, 35, "Text",ExpressionUUID->"da1c9873-4772-4aca-b860-2459eb131cfd"],
+Cell[4740, 134, 479, 12, 52, "Input",ExpressionUUID->"00cebfd0-f9a8-4994-86b7-837b6584fa06"],
+Cell[5222, 148, 258, 4, 35, "Text",ExpressionUUID->"f6bbf3b4-92a0-48c2-a6af-635da4c807f5"],
+Cell[5483, 154, 1662, 45, 94, "Input",ExpressionUUID->"6a13fae7-6a17-41d9-9d4b-140ed39f651e"],
+Cell[7148, 201, 217, 4, 35, "Text",ExpressionUUID->"36038849-6d1d-4f32-a7a7-a8ca4629c936"],
+Cell[7368, 207, 2523, 60, 102, "Input",ExpressionUUID->"464d620d-0d2d-49da-88dc-755b8ffc1cd0"],
+Cell[9894, 269, 1444, 32, 98, "Input",ExpressionUUID->"5d24123c-0926-4051-b662-dffb0df13dc2"],
+Cell[11341, 303, 594, 16, 30, "Input",ExpressionUUID->"058b394d-a4fe-48cf-809b-a4b5db15db33"],
+Cell[11938, 321, 404, 7, 35, "Text",ExpressionUUID->"3fe72492-a4e7-4754-ae0b-ee6b4063b73c"],
+Cell[CellGroupData[{
+Cell[12367, 332, 726, 17, 30, "Input",ExpressionUUID->"95531b88-bad8-4a13-88f1-02b497592ed4"],
+Cell[13096, 351, 1941, 39, 621, "Output",ExpressionUUID->"520c5c24-c90c-409c-8a90-60361a21fad8"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
