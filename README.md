@@ -13,3 +13,5 @@ This repository contains Mathematica notebooks that give examples of how to use 
 | Fluxes_PN_vs_numerical.nb     		| Compare PN and numerical calculations of the radiated flux for circular orbits. The PN coefficients are loaded from the [PostNewtonianSelfForce](https://bhptoolkit.org/PostNewtonianSelfForce/) package and the flux data comes from the [CircularOrbitSelfForce ](https://github.com/BlackHolePerturbationToolkit/CircularOrbitSelfForceData) repository. |
 | SWSH_high_frequency.nb                | Compute high frequency expansions for the eigenvalue and eigenfunctions of the spin-weighted spheroidal equation using the [SpinWeightedSpheroidalHarmonics](http://bhptoolkit.org/SpinWeightedSpheroidalHarmonics/) package.	   |
 | KerrParallelTransportFrame.nb			| Demonstrates using the ParallelTransport subpackage of [KerrGeodesics](http://bhptoolkit.org/KerrGeodesics/).												|
+| PNSF_Ecc_Fluxes.nb						| Demonstrates the analytic post-Newtonian self force expansions of the fluxes at infinity for eccentric orbits on a Schwarzschild background.	
+|
