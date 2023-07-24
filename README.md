@@ -13,4 +13,4 @@ This repository contains Mathematica notebooks that give examples of how to use 
 | SWSH_high_frequency.nb                | Compute high frequency expansions for the eigenvalue and eigenfunctions of the spin-weighted spheroidal equation using the [SpinWeightedSpheroidalHarmonics](http://bhptoolkit.org/SpinWeightedSpheroidalHarmonics/) package.	   |
 | KerrParallelTransportFrame.nb			| Demonstrates using the ParallelTransport subpackage of [KerrGeodesics](http://bhptoolkit.org/KerrGeodesics/).												|
 | PNSF_Ecc_Fluxes.nb						| Demonstrates the analytic post-Newtonian self force expansions of the fluxes at infinity for eccentric orbits on a Schwarzschild background.	|
-
+| Scalar_Self_Force.nb						| Use the Teukolsky package to compute the regularized scalar self-force.	|
